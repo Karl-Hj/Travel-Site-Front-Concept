@@ -1,0 +1,19 @@
+.booking-container {
+  height: 70%;
+  width: 70%;
+  background: linear-gradient(
+    135deg,
+    rgba(160, 158, 158, 0.3),
+    rgba(179, 179, 176, 0.5)
+  );
+  backdrop-filter: blur(10px);
+  border: 0px 0px 10px 10px;
+  position: absolute;
+  padding: 0px;
+  margin: 0px;
+  z-index: 15;
+}
+
+.datePicker {
+  background: blue;
+}

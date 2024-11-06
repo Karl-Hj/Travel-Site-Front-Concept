@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { Swipe } from "../assets/components/Swipe";
 import { Beach } from "../assets/components/Beach";
 import "../assets/components/css/beach.css";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./home.css";
 
 export function Home() {
   const widthRef = useRef<HTMLDivElement>(null);
