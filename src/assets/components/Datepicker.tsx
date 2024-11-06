@@ -37,6 +37,11 @@ function reducer(state: number, action: Action) {
 
 export function DatePicker() {
   const currentMonth = new Date().getMonth();
+  // Get the day of the first date of the month
+  const year = new Date().getFullYear();
+  const firstDayOfMonth = new Date(year, currentMonth, 1).getDay();
+  console.log(currentMonth);
+
   const [amountOfDays, dispatch] = useReducer(reducer, currentMonth);
 
   //   Loads array with current Month.
@@ -44,18 +49,22 @@ export function DatePicker() {
     dispatch({ type: currentMonth });
   }, [currentMonth]);
 
-  const days: number[] = Array(amountOfDays).fill(0);
+  const days: number[] = Array(firstDayOfMonth)
+    .fill(null)
+    .concat(Array.from({ length: amountOfDays }, (_, index) => index + 1));
 
   return (
     <div className="date-picker-container">
       <div className="date-picker-days-container">
-        {days.map((day, index) => {
-          return (
-            <div className="days" key={index}>
-              {index + 1}
-            </div>
-          );
-        })}
+        <div className="date-grid-container">
+          {days.map((day, index) => {
+            return (
+              <div className="days" key={index}>
+                {day !== null ? day : ""}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

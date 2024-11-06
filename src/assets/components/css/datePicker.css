@@ -10,11 +10,17 @@
   position: relative;
   z-index: 100;
 }
+
+.date-grid-container {
+  display: grid;
+  grid-template-columns: repeat(7, 0fr);
+  z-index: 100;
+}
+
 .days {
-  display: inline-block;
-  position: relative;
   height: 50px;
   width: 50px;
   background: white;
   border: 1px solid black;
+  z-index: 100;
 }
