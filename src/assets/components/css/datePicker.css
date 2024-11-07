@@ -1,14 +1,40 @@
 .date-picker-container {
   height: 100%;
   width: 100%;
-  position: relative;
+  position: absolute;
   z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.date-picker-container {
-  height: 50%;
-  width: 50%;
+
+.date-container-info {
   position: relative;
-  z-index: 100;
+  height: 39%;
+  width: auto;
+  padding-top: 1%;
+  background: white;
+  text-align: center;
+}
+.fa-arrow-left,
+.fa-arrow-right {
+  font-size: 1.5em;
+  position: absolute;
+}
+.fa-arrow-left {
+  left: 3%;
+}
+.fa-arrow-right {
+  right: 3%;
+}
+
+.current-month,
+.current-year {
+  position: relative;
+  font-size: 1.5em;
+}
+.current-month {
+  left: -10%;
 }
 
 .date-grid-container {
@@ -17,10 +43,61 @@
   z-index: 100;
 }
 
-.days {
+.dates {
+  position: relative;
   height: 50px;
   width: 50px;
   background: white;
-  border: 1px solid black;
   z-index: 100;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.days {
+  border: none;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+
+.selected-date {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  width: 100%;
+  bottom: -10%;
+  font-size: 1.5em;
+  background: white;
+}
+.date-button {
+  position: absolute;
+  height: 10%;
+  width: 20%;
+  bottom: 3.5%;
+  right: 0%;
+  background: gray;
+  cursor: pointer;
+  z-index: 200;
+}
+
+.date-button:hover {
+  background: green;
+  color: white;
+}
+.active-date {
+  position: relative;
+  background-color: red;
+  width: auto;
+  height: auto;
+  bottom: 1%;
+  border-radius: 50%;
+  color: white; /* För att texten ska synas bättre */
 }
