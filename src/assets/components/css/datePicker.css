@@ -82,7 +82,7 @@
   height: 10%;
   width: 20%;
   bottom: 3.5%;
-  right: 0%;
+  right: 2%;
   background: gray;
   cursor: pointer;
   z-index: 200;
@@ -95,8 +95,6 @@
 .active-date {
   position: relative;
   background-color: red;
-  width: auto;
-  height: auto;
   bottom: 1%;
   border-radius: 50%;
   color: white; /* För att texten ska synas bättre */
