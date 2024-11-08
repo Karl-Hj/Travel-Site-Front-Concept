@@ -2,24 +2,19 @@ import { useEffect, useState } from "react";
 import "./css/datePicker.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { DateButtonValidation } from "./DateButtonValidation";
-import { DatePickerProps } from "./interfaces/interface";
 
-export function DatePicker({
-  currentMonth,
-  currentYear,
-  selectedDate,
-  setCurrentMonth,
-  setCurrentYear,
-  setSelectedDate,
-}: DatePickerProps) {
+export function DatePicker() {
+  const INITALMONTH = new Date().getMonth();
+  const INITALYEAR = new Date().getFullYear();
   const [currentMonthDisplay, setCurrentMonthDisplay] = useState<string>("");
   const [currentYearDisplay, setCurrentYearDisplay] = useState<number>();
-
+  const [currentMonth, setCurrentMonth] = useState<number>(INITALMONTH);
+  const [currentYear, setCurrentYear] = useState<number>(INITALYEAR);
   const [daysInMonth, setDaysInMonth] = useState<number>(0);
   const [firstDayIndex, setFirstDayIndex] = useState<number>(0);
   const [arrayOfDates, setArrayOfDates] = useState<(number | null)[]>([]);
   const monthFormater = new Intl.DateTimeFormat("en-US", { month: "long" });
-
+  const [selectedDate, setSelectedDate] = useState<number>(0);
   const [selectedDateDisplay, setSelectedDateDisplay] = useState<string>(""); // Shows selected  dd/mm/yyyy to user
 
   useEffect(() => {
@@ -51,7 +46,7 @@ export function DatePicker({
   function decrementMonth() {
     // if currentMonth is 0 (Jan) reset month to december
     if (currentMonth === 0) {
-      setCurrentMonth(() => 11);
+      setCurrentMonth(11);
       setCurrentYear((prevYear) => prevYear - 1); // Decrement year by 1
     } else {
       setCurrentMonth((prevMonth) => prevMonth - 1); // Decrement month by 1
@@ -59,7 +54,7 @@ export function DatePicker({
   }
   function incrementMonth() {
     if (currentMonth === 11) {
-      setCurrentMonth(() => 0);
+      setCurrentMonth(0);
       setCurrentYear((prevYear) => prevYear + 1);
     } else {
       setCurrentMonth((prevMonth) => prevMonth + 1);

@@ -18,13 +18,3 @@ export interface DateButton {
   selectedDate: number;
   className: string;
 }
-
-export interface DatePickerProps {
-  className: string;
-  currentMonth: number;
-  currentYear: number;
-  selectedDate: number;
-  setCurrentMonth: (update: (prevYear: number) => number) => void;
-  setCurrentYear: (update: (prevYear: number) => number) => void;
-  setSelectedDate: (date: number) => void;
-}
