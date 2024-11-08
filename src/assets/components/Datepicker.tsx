@@ -20,7 +20,7 @@ export function DatePicker({ setShowBooking }: CloseDatePicker) {
   const [showButton, setShowButton] = useToggle(false);
   const [travelStartDate, setTravelStartDate] = useState<Date>();
   const [travelReturnDate, setTravelReturnDate] = useState<Date>();
-  let [dateDivEventTarget, setDateDivEventTarget] = useState<HTMLElement>();
+  const [dateDivEventTarget, setDateDivEventTarget] = useState<HTMLElement>();
   const [showError, setShowError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -72,17 +72,17 @@ export function DatePicker({ setShowBooking }: CloseDatePicker) {
     clearActiveClass.forEach((date) => {
       date.classList.remove("active-date");
     });
-    dateDivEventTarget = e.currentTarget as HTMLDivElement;
+    const divTarget = e.currentTarget as HTMLDivElement;
 
-    if (dateDivEventTarget.innerText === "") return;
+    if (divTarget.innerText === "") return;
 
-    dateDivEventTarget.classList.add("active-date");
-    const activeDate = dateDivEventTarget.innerText;
+    divTarget.classList.add("active-date");
+    const activeDate = divTarget.innerText;
     const wholeDate = `${activeDate}/${currentMonth}/${currentYear}`;
 
     setSelectedDateDisplay(wholeDate);
     setSelectedDate(parseInt(activeDate));
-    setDateDivEventTarget(dateDivEventTarget);
+    setDateDivEventTarget(divTarget);
   }
 
   /* Function and use effect to handle click event and validation on datepicker */
@@ -114,18 +114,22 @@ export function DatePicker({ setShowBooking }: CloseDatePicker) {
 
   //If return date is set validation runs
   useEffect(() => {
-    if (travelReturnDate) {
+    if (travelReturnDate && travelStartDate) {
       validation();
+      console.log("test");
     }
-  }, [travelReturnDate]);
+  }, [travelReturnDate, travelStartDate]);
 
   //Controlls that return date is not earlier than depature date
   function validation() {
     if (travelStartDate! > travelReturnDate!) {
-      setShowError(true);
+      if (!showError) {
+        setShowError(true);
+      }
     } else {
-      setShowError(false);
-      alert("You have booked a trip!");
+      if (showError) {
+        setShowError(false);
+      }
     }
   }
   //Resets and bring user back to depature screen.

@@ -1,7 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { MaskVideo } from "../assets/components/MaskVideo";
 import { useEffect, useRef, useState } from "react";
-import { Swipe } from "../assets/components/Beach/Swipe";
 import { Beach } from "../assets/components/Beach/Beach";
 import "../assets/components/css/beach.css";
 import "slick-carousel/slick/slick.css";
@@ -26,8 +24,7 @@ export function Home() {
 
   return (
     <div className="home-container" ref={widthRef}>
-      <MaskVideo />
-      {width < 960 ? <Swipe /> : <Beach />}
+      <Beach width={width} />
       <Outlet />
     </div>
   );
