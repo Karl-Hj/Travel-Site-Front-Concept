@@ -43,9 +43,10 @@ export function Beach({ width }: Width) {
         slidesToScroll: 1,
       });
     }
-  }, []);
+  }, [width]);
 
-  function hideInfo() {
+  //Close travel info box.
+  function closeInfo() {
     const current = travelRef.current;
     if (current) {
       current.style.display = "none";
@@ -64,7 +65,9 @@ export function Beach({ width }: Width) {
       const destination = current.querySelector(
         "td.destination"
       ) as HTMLTableCellElement;
-      const days = current.querySelector("td.days") as HTMLTableCellElement;
+      const days = current.querySelector(
+        "td.days-length"
+      ) as HTMLTableCellElement;
       const price = current.querySelector("td.price") as HTMLTableCellElement;
       const description = current.querySelector(
         "p.description"
@@ -85,6 +88,11 @@ export function Beach({ width }: Width) {
       }
     }
   }
+
+  // useEffect(() => {
+  //   console.log("Change detected");
+  // }, []);
+
   return (
     <>
       <MaskVideo />
@@ -114,12 +122,10 @@ export function Beach({ width }: Width) {
               })}
             </Slider>
           </div>
-          <div
-            className="travel-information"
-            ref={travelRef}
-            onClick={hideInfo}
-          >
-            <button className="close-button">Close</button>
+          <div className="travel-information" ref={travelRef}>
+            <button className="close-button" onClick={closeInfo}>
+              Close
+            </button>
             <table>
               <tbody>
                 <tr>
@@ -128,7 +134,7 @@ export function Beach({ width }: Width) {
                 </tr>
                 <tr>
                   <th>Days:</th>
-                  <td className="days-table"></td>
+                  <td className="days-length"></td>
                 </tr>
                 <tr>
                   <th>Price:</th>

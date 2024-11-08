@@ -13,7 +13,7 @@
   position: absolute;
   width: 80%;
   max-width: 1431px;
-  height: 80%;
+  height: 55%;
   mask-image: url(../../images/svg/travel-splash-4.svg);
   mask-size: cover;
   mask-repeat: no-repeat;
@@ -49,6 +49,10 @@
   cursor: pointer;
 }
 
+.slick-slide > div {
+  margin: 0 10px;
+}
+
 .beach-text-container {
   height: 100%;
   width: 100%;
@@ -64,10 +68,10 @@
 
 .travel-information {
   position: absolute;
-  bottom: 15%;
-  height: auto;
-  width: 50%;
-  padding: 10px;
+  bottom: 4%;
+  height: 40%;
+  width: 80%;
+
   background: linear-gradient(
     135deg,
     rgba(160, 158, 158, 0.3),
@@ -77,19 +81,22 @@
   border-radius: 0px 0px 10px 10px;
   z-index: 4;
   display: none;
+  padding-top: 20px;
 }
 
 .close-button {
   height: 50px;
-  position: relative;
-  width: 100%;
+  position: absolute;
+  width: 20%;
+  right: 0;
+  top: 0;
 }
 
 .book-trip-button {
-  position: relative;
+  position: absolute;
   height: 50px;
   width: 100%;
-  top: 14%;
+  bottom: 1%;
 }
 
 @media screen and (min-width: 960px) {
