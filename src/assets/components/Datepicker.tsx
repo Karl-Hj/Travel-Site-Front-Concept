@@ -125,6 +125,7 @@ export function DatePicker({ setShowBooking }: CloseDatePicker) {
       setShowError(true);
     } else {
       setShowError(false);
+      alert("You have booked a trip!");
     }
   }
   //Resets and bring user back to depature screen.

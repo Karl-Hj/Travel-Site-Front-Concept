@@ -12,6 +12,7 @@
 .mask-container__beach {
   position: absolute;
   width: 80%;
+  max-width: 1431px;
   height: 80%;
   mask-image: url(../../images/svg/travel-splash-4.svg);
   mask-size: cover;
