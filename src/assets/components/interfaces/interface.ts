@@ -12,9 +12,6 @@ export interface ImagesArray {
   images: SwipeElements[];
 }
 
-export interface DateButton {
-  currentMonth: number;
-  currentYear: number;
-  selectedDate: number;
-  className: string;
+export interface CloseDatePicker {
+  setShowBooking: () => void;
 }

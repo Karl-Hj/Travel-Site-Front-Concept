@@ -1,10 +1,9 @@
 import { ImagesArray } from "./interfaces/interface";
 import "./css/beachSwipe.css";
 import Slider from "react-slick";
-
 import { useRef } from "react";
 import { useToggle } from "./costumHooks/useToggle";
-import { Booking } from "./Booking";
+import { DatePicker } from "./Datepicker";
 
 export function BeachSwipe({ images }: ImagesArray) {
   const travelRef = useRef<HTMLDivElement>(null);
@@ -90,7 +89,7 @@ export function BeachSwipe({ images }: ImagesArray) {
             </tr>
             <tr>
               <th>Days:</th>
-              <td className="days"></td>
+              <td className="days-table"></td>
             </tr>
             <tr>
               <th>Price:</th>
@@ -103,7 +102,7 @@ export function BeachSwipe({ images }: ImagesArray) {
           Book Trip
         </button>
       </div>
-      {showBooking ? <Booking /> : ""}
+      {showBooking ? <DatePicker setShowBooking={setShowBooking} /> : ""}
     </>
   );
 }

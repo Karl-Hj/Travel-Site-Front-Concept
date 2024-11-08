@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import "./css/datePicker.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { DateButtonValidation } from "./DateButtonValidation";
+import { useToggle } from "./costumHooks/useToggle";
+import { CloseDatePicker } from "./interfaces/interface";
 
-export function DatePicker() {
+export function DatePicker({ setShowBooking }: CloseDatePicker) {
   const INITALMONTH = new Date().getMonth();
   const INITALYEAR = new Date().getFullYear();
   const [currentMonthDisplay, setCurrentMonthDisplay] = useState<string>("");
@@ -16,6 +17,11 @@ export function DatePicker() {
   const monthFormater = new Intl.DateTimeFormat("en-US", { month: "long" });
   const [selectedDate, setSelectedDate] = useState<number>(0);
   const [selectedDateDisplay, setSelectedDateDisplay] = useState<string>(""); // Shows selected  dd/mm/yyyy to user
+  const [showButton, setShowButton] = useToggle(false);
+  const [travelStartDate, setTravelStartDate] = useState<Date>();
+  const [travelReturnDate, setTravelReturnDate] = useState<Date>();
+  let [dateDivEventTarget, setDateDivEventTarget] = useState<HTMLElement>();
+  const [showError, setShowError] = useState<boolean>(false);
 
   useEffect(() => {
     /*Sending in year to check for leap year.
@@ -66,53 +72,135 @@ export function DatePicker() {
     clearActiveClass.forEach((date) => {
       date.classList.remove("active-date");
     });
-    const targetDate = e.currentTarget as HTMLDivElement;
-    if (targetDate.innerText === "") return;
+    dateDivEventTarget = e.currentTarget as HTMLDivElement;
 
-    targetDate.classList.add("active-date");
-    const activeDate = targetDate.innerText;
+    if (dateDivEventTarget.innerText === "") return;
+
+    dateDivEventTarget.classList.add("active-date");
+    const activeDate = dateDivEventTarget.innerText;
     const wholeDate = `${activeDate}/${currentMonth}/${currentYear}`;
 
     setSelectedDateDisplay(wholeDate);
     setSelectedDate(parseInt(activeDate));
+    setDateDivEventTarget(dateDivEventTarget);
+  }
+
+  /* Function and use effect to handle click event and validation on datepicker */
+
+  //Retrives the depature date and displays instruction text
+  function startDate() {
+    if (!dateDivEventTarget) return; //Checks if user have clicked on a date
+
+    setShowButton();
+
+    dateDivEventTarget!.classList.add("departure-date");
+    const instructionText = document.querySelector(
+      ".date-picker-instruction"
+    ) as HTMLDivElement;
+
+    instructionText.innerText = "Select A Date For Return";
+
+    setTravelStartDate(
+      new Date(`${currentYear},${currentMonth + 1},${selectedDate} `)
+    );
+  }
+
+  //Retrives the return date
+  function returnDate() {
+    setTravelReturnDate(
+      new Date(`${currentYear},${currentMonth + 1},${selectedDate} `)
+    );
+  }
+
+  //If return date is set validation runs
+  useEffect(() => {
+    if (travelReturnDate) {
+      validation();
+    }
+  }, [travelReturnDate]);
+
+  //Controlls that return date is not earlier than depature date
+  function validation() {
+    if (travelStartDate! > travelReturnDate!) {
+      setShowError(true);
+    } else {
+      setShowError(false);
+    }
+  }
+  //Resets and bring user back to depature screen.
+  function resetDates() {
+    const removeDeparture = document.querySelectorAll(".dates");
+    removeDeparture.forEach((date) => {
+      date.classList.remove("departure-date");
+    });
+    const instructionText = document.querySelector(
+      ".date-picker-instruction"
+    ) as HTMLDivElement;
+    instructionText.innerText = "Select A Date For Depature";
+    setShowError(false);
+    setShowButton();
   }
 
   return (
-    <div className="date-picker-container">
-      <div className="date-container-info">
-        <i className="fas fa-arrow-left" onClick={decrementMonth} />
-        <span className="current-month">{currentMonthDisplay}</span>
-        <span className="current-year">{currentYearDisplay}</span>
-        <i className="fas fa-arrow-right" onClick={incrementMonth} />
-        <div className="date-grid-container">
-          <div className="days">Mon</div>
-          <div className="days">Tue</div>
-          <div className="days">Wed</div>
-          <div className="days">Thu</div>
-          <div className="days">Fri</div>
-          <div className="days">Sat</div>
-          <div className="days">Sun</div>
-
-          {arrayOfDates.map((date, index) => {
-            const isDisabled = date === null;
-            return (
-              <div
-                className={`dates ${isDisabled ? `disable-click` : `dates`}`}
-                key={index}
-                onClick={(e) => !isDisabled && selectDate(e)}
-              >
-                {date !== null ? date : ""}
-              </div>
-            );
-          })}
+    <div className="date-pick-booking-container">
+      <button className="close-date-picker" onClick={setShowBooking}>
+        Close
+      </button>
+      <div className="date-picker-container">
+        <div className="date-picker-instruction">
+          Select A Date For Depature
         </div>
-        <DateButtonValidation
-          className="date-button"
-          currentMonth={currentMonth}
-          currentYear={currentYear}
-          selectedDate={selectedDate}
-        />
-        <div className="selected-date">{selectedDateDisplay}</div>
+        {showError !== true ? (
+          ""
+        ) : (
+          <div className="date-picker-error">
+            Return Date can not be before start Date!
+          </div>
+        )}
+        <div className="date-container-info">
+          <i className="fas fa-arrow-left" onClick={decrementMonth} />
+          <span className="current-month">{currentMonthDisplay}</span>
+          <span className="current-year">{currentYearDisplay}</span>
+          <i className="fas fa-arrow-right" onClick={incrementMonth} />
+          <div className="date-grid-container">
+            <div className="days">Mon</div>
+            <div className="days">Tue</div>
+            <div className="days">Wed</div>
+            <div className="days">Thu</div>
+            <div className="days">Fri</div>
+            <div className="days">Sat</div>
+            <div className="days">Sun</div>
+
+            {arrayOfDates.map((date, index) => {
+              const isDisabled = date === null;
+              return (
+                <div
+                  className={`dates ${isDisabled ? `disable-click` : `dates`}`}
+                  key={index}
+                  onClick={(e) => !isDisabled && selectDate(e)}
+                >
+                  {date !== null ? date : ""}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="selected-date">{selectedDateDisplay}</div>
+          {showButton !== true ? (
+            <button className="date-button-start" onClick={startDate}>
+              Confirm Departure Date
+            </button>
+          ) : (
+            <>
+              <button className="reset-button" onClick={resetDates}>
+                Reset
+              </button>
+              <button className="date-button-return" onClick={returnDate}>
+                Confirm Return Date
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

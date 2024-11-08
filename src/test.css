@@ -1,26 +1,6 @@
-.date-pick-booking-container {
-  height: 100%;
-  width: 100%;
-
-  background: linear-gradient(
-    135deg,
-    rgba(160, 158, 158, 0.3),
-    rgba(179, 179, 176, 0.5)
-  );
-  backdrop-filter: blur(10px);
-  border: 0px 0px 10px 10px;
-  position: absolute;
-  padding: 0px;
-  margin: 0px;
-  z-index: 9;
-  top: -5%;
-  display: flex;
-  justify-content: center;
-}
-
 .date-picker-container {
   height: 100%;
-  width: 300px;
+  width: 100%;
   position: absolute;
   z-index: 10;
   display: flex;
@@ -30,8 +10,8 @@
 
 .date-container-info {
   position: relative;
-  height: 50%;
-  width: 95%;
+  height: 39%;
+  width: auto;
   padding-top: 1%;
   background: white;
   text-align: center;
@@ -39,15 +19,15 @@
 
 .date-picker-instruction {
   position: absolute;
-  top: 10%;
-  font-size: 1.5em;
+  top: 20%;
+  font-size: 3em;
 }
 
 .date-picker-error {
   position: absolute;
-  top: 16%;
+  top: 25%;
   padding: 4px;
-  font-size: 1.1em;
+  font-size: 2em;
   background-color: red;
 }
 
@@ -66,40 +46,35 @@
 .current-month,
 .current-year {
   position: relative;
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
 .current-month {
   left: -10%;
 }
 
 .date-grid-container {
-  position: relative;
   display: grid;
   grid-template-columns: repeat(7, 0fr);
   z-index: 10;
-  width: 100%;
-  height: 100%;
-  justify-items: center;
-  justify-content: center;
 }
 
 .dates {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
-  height: 100%;
-  width: 100%;
+  height: 50px;
+  width: 50px;
   background: white;
   z-index: 10;
   cursor: pointer;
-  bottom: 80%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .days {
   border: none;
   height: 50px;
-  width: 35px;
+  width: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,9 +100,9 @@
 .date-button-start {
   position: absolute;
   font-size: 1.3em;
-  height: 15%;
+  height: 10%;
   width: 100%;
-  bottom: -25%;
+  bottom: -20%;
   right: 0%;
   background: gray;
   cursor: pointer;
@@ -137,9 +112,9 @@
 .date-button-return {
   position: absolute;
   font-size: 1.3em;
-  height: 15%;
+  height: 10%;
   width: 100%;
-  bottom: -25%;
+  bottom: -20%;
   right: 0%;
   background: gray;
   cursor: pointer;
@@ -152,23 +127,14 @@
   font-size: 1.3em;
   height: 10%;
   width: 25%;
-  bottom: -10%;
+  bottom: 3%;
   right: 0%;
   background: gray;
   cursor: pointer;
   border: 0;
   z-index: 10;
 }
-.close-date-picker {
-  position: absolute;
-  top: 0%;
-  right: 0%;
-  padding: 5px;
-  width: 20%;
-  cursor: pointer;
-}
 
-.close-date-picker:hover,
 .reset-button:hover,
 .date-button-start:hover,
 .date-button-return:hover {
@@ -176,10 +142,9 @@
   color: white;
 }
 .active-date {
+  position: relative;
   background-color: red;
-  bottom: 80%;
-  width: 100%;
-  height: 100%;
+  bottom: 1%;
   border-radius: 50%;
   color: white; /* För att texten ska synas bättre */
 }
@@ -187,28 +152,7 @@
 .departure-date {
   position: relative;
   background-color: green;
-  width: 100%;
-  height: 100%;
-  bottom: 80%;
+  bottom: 1%;
   border-radius: 50%;
   color: white;
-}
-@media screen and (max-width: 959px) and (orientation: landscape) {
-  .date-pick-booking-container {
-    height: 100vh;
-  }
-  .date-button-start,
-  .date-button-return {
-    bottom: -25%;
-  }
-  .date-picker-container {
-    height: 100vh;
-  }
-  .date-container-info {
-    height: 60%;
-  }
-  .selected-date {
-    font-size: 1.2em;
-    bottom: -10%;
-  }
 }
