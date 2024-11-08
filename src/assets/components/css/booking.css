@@ -11,9 +11,10 @@
   position: absolute;
   padding: 0px;
   margin: 0px;
-  z-index: 15;
+  z-index: 9;
 }
 
-.datePicker {
-  background: blue;
+.awayPick {
+  position: absolute;
+  right: 100%;
 }

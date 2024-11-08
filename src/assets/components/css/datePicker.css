@@ -2,7 +2,7 @@
   height: 100%;
   width: 100%;
   position: absolute;
-  z-index: 100;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,7 +40,7 @@
 .date-grid-container {
   display: grid;
   grid-template-columns: repeat(7, 0fr);
-  z-index: 100;
+  z-index: 10;
 }
 
 .dates {
@@ -48,7 +48,7 @@
   height: 50px;
   width: 50px;
   background: white;
-  z-index: 100;
+  z-index: 10;
   cursor: pointer;
 
   display: flex;
@@ -90,7 +90,7 @@
   right: 2%;
   background: gray;
   cursor: pointer;
-  z-index: 200;
+  z-index: 10;
 }
 
 .date-button:hover {

@@ -10,6 +10,7 @@ export function DateButtonValidation({
     const month = currentMonth;
     const year = currentYear;
     const day = selectedDate;
+    console.log(month, year, day);
   }
   return (
     <button className={className} onClick={validate}>

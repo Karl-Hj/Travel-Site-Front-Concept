@@ -3,12 +3,12 @@ import "./css/beachSwipe.css";
 import Slider from "react-slick";
 
 import { useRef } from "react";
-// import { useToggle } from "./costumHooks/useToggle";
+import { useToggle } from "./costumHooks/useToggle";
 import { Booking } from "./Booking";
 
 export function BeachSwipe({ images }: ImagesArray) {
   const travelRef = useRef<HTMLDivElement>(null);
-  // const [showBooking, setShowBooking] = useToggle(false);
+  const [showBooking, setShowBooking] = useToggle(false);
 
   const settings = {
     dots: true,
@@ -99,10 +99,11 @@ export function BeachSwipe({ images }: ImagesArray) {
           </tbody>
         </table>
         <p className="description"></p>
-        <button className="book-trip-button">Book Trip</button>
+        <button className="book-trip-button" onClick={setShowBooking}>
+          Book Trip
+        </button>
       </div>
-      {/* {showBooking ? <Booking /> : ""} */}
-      <Booking />
+      {showBooking ? <Booking /> : ""}
     </>
   );
 }
