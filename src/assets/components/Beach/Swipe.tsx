@@ -1,4 +1,4 @@
-import "./css/swipe.css";
+import "../css/swipe.css";
 import { SwipeFunction } from "./SwipeFunction";
 import { images } from "./SwipeImages";
 

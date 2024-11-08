@@ -1,9 +1,9 @@
-import { ImagesArray } from "./interfaces/interface";
-import "./css/beachSwipe.css";
+import { ImagesArray } from "../interfaces/interface";
+import "../css/beachSwipe.css";
 import Slider from "react-slick";
 import { useRef } from "react";
-import { useToggle } from "./costumHooks/useToggle";
-import { DatePicker } from "./Datepicker";
+import { useToggle } from "../costumHooks/useToggle";
+import { DatePicker } from "../Datepicker";
 
 export function BeachSwipe({ images }: ImagesArray) {
   const travelRef = useRef<HTMLDivElement>(null);

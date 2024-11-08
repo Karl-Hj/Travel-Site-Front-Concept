@@ -1,10 +1,10 @@
-import img1 from "../../assets/images/swipe/1.jpg";
-import img2 from "../../assets/images/swipe/2.jpg";
-import img3 from "../../assets/images/swipe/3.jpg";
-import img4 from "../../assets/images/swipe/4.jpg";
-import img5 from "../../assets/images/swipe/5.jpg";
-import img6 from "../../assets/images/swipe/6.jpg";
-import { SwipeElements } from "./interfaces/interface";
+import img1 from "../../images/swipe/1.jpg";
+import img2 from "../../images/swipe/2.jpg";
+import img3 from "../../images/swipe/3.jpg";
+import img4 from "../../images/swipe/4.jpg";
+import img5 from "../../images/swipe/5.jpg";
+import img6 from "../../images/swipe/6.jpg";
+import { SwipeElements } from "../interfaces/interface";
 
 export const images: SwipeElements[] = [
   {

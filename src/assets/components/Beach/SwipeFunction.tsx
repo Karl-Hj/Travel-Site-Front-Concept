@@ -1,8 +1,8 @@
 import Slider from "react-slick";
-import { ImagesArray } from "./interfaces/interface";
-import { useToggle } from "./costumHooks/useToggle";
-import "./css/datePicker.css";
-import { DatePicker } from "./Datepicker";
+import { ImagesArray } from "../interfaces/interface";
+import { useToggle } from "../costumHooks/useToggle";
+import "../css/datePicker.css";
+import { DatePicker } from "../Datepicker";
 
 export function SwipeFunction({ images }: ImagesArray) {
   const [isActive, ToggleExpand] = useToggle(false);
