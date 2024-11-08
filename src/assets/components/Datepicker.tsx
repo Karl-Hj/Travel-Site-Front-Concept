@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./css/datePicker.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { DateButtonValidation } from "./DateButtonValidation";
+
 export function DatePicker() {
   const INITALMONTH = new Date().getMonth();
   const INITALYEAR = new Date().getFullYear();
@@ -12,7 +14,8 @@ export function DatePicker() {
   const [firstDayIndex, setFirstDayIndex] = useState<number>(0);
   const [arrayOfDates, setArrayOfDates] = useState<(number | null)[]>([]);
   const monthFormater = new Intl.DateTimeFormat("en-US", { month: "long" });
-  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<number>(0);
+  const [selectedDateDisplay, setSelectedDateDisplay] = useState<string>(""); // Shows selected  dd/mm/yyyy to user
 
   useEffect(() => {
     /*Sending in year to check for leap year.
@@ -64,11 +67,14 @@ export function DatePicker() {
       date.classList.remove("active-date");
     });
     const targetDate = e.currentTarget as HTMLDivElement;
+    if (targetDate.innerText === "") return;
+
     targetDate.classList.add("active-date");
     const activeDate = targetDate.innerText;
     const wholeDate = `${activeDate}/${currentMonth}/${currentYear}`;
 
-    setSelectedDate(wholeDate);
+    setSelectedDateDisplay(wholeDate);
+    setSelectedDate(parseInt(activeDate));
   }
 
   return (
@@ -88,15 +94,25 @@ export function DatePicker() {
           <div className="days">Sun</div>
 
           {arrayOfDates.map((date, index) => {
+            const isDisabled = date === null;
             return (
-              <div className="dates" key={index} onClick={(e) => selectDate(e)}>
+              <div
+                className={`dates ${isDisabled ? `disable-click` : `dates`}`}
+                key={index}
+                onClick={(e) => !isDisabled && selectDate(e)}
+              >
                 {date !== null ? date : ""}
               </div>
             );
           })}
         </div>
-        <button className="date-button">Done</button>
-        <div className="selected-date">{selectedDate}</div>
+        <DateButtonValidation
+          className="date-button"
+          currentMonth={currentMonth}
+          currentYear={currentYear}
+          selectedDate={selectedDate}
+        />
+        <div className="selected-date">{selectedDateDisplay}</div>
       </div>
     </div>
   );
