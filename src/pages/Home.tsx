@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { MaskVideo } from "../assets/components/MaskVideo";
 import { useEffect, useRef, useState } from "react";
-import { Swipe } from "../assets/components/Swipe";
-import { Beach } from "../assets/components/Beach";
+import { Swipe } from "../assets/components/Beach/Swipe";
+import { Beach } from "../assets/components/Beach/Beach";
 import "../assets/components/css/beach.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
