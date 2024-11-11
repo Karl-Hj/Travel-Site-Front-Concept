@@ -1,0 +1,25 @@
+.more-information-container {
+  position: absolute;
+  height: 75%;
+  width: 95%;
+  background: linear-gradient(
+    135deg,
+    rgba(160, 158, 158, 0.3),
+    rgba(123, 123, 121, 0.5)
+  );
+  backdrop-filter: blur(10px);
+  border-radius: 0px 0px 10px 10px;
+  z-index: 10;
+}
+
+.more-information-image {
+  height: 300px;
+  width: 342px;
+}
+
+.close-info-button {
+  position: absolute;
+  right: 0%;
+  width: 100px;
+  height: 40px;
+}

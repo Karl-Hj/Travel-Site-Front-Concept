@@ -33,12 +33,28 @@
 
 .beach-carusal-container {
   position: relative;
-  top: -18%;
+  top: 60%;
   width: 90%;
+  height: 80%;
   z-index: 4;
   margin: auto;
+  transform: translateY(-50%);
 }
 
+.travel-info-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+}
+
+.button-show-information {
+  width: 100%;
+  margin-top: 3px;
+  height: 40px;
+}
 .slides {
   height: 100%;
   width: 100%;
@@ -63,14 +79,13 @@
   );
   backdrop-filter: blur(10px);
   border-radius: 0px 0px 10px 10px;
-  text-align: center;
 }
 
 .travel-information {
   position: absolute;
-  bottom: 4%;
-  height: 40%;
-  width: 80%;
+  top: 0%;
+  height: 100%;
+  width: 7.3%;
 
   background: linear-gradient(
     135deg,
@@ -79,9 +94,11 @@
   );
   backdrop-filter: blur(10px);
   border-radius: 0px 0px 10px 10px;
-  z-index: 4;
-  display: none;
-  padding-top: 20px;
+  z-index: 5;
+}
+
+.expanded-travel-information {
+  margin-left: 5px;
 }
 
 .close-button {
@@ -91,12 +108,15 @@
   right: 0;
   top: 0;
 }
+tr {
+  display: block;
+}
 
 .book-trip-button {
   position: absolute;
   height: 50px;
   width: 100%;
-  bottom: 1%;
+  bottom: 0%;
 }
 
 @media screen and (min-width: 960px) {

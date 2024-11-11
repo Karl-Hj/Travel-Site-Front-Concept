@@ -1,13 +1,13 @@
-import { images } from "./SwipeImages";
+import { infoBeach } from "./SwipeImages";
 import Slider from "react-slick";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useToggle } from "../costumHooks/useToggle";
 import { DatePicker } from "../Datepicker";
+import { MoreInformation } from "../MoreInformation";
+import { DestinationInfo } from "../interfaces/interface";
 import { MaskVideo } from "../MaskVideo";
 
-import "../css/maskVideo.css";
-
-interface Width {
+interface BeachProps {
   width: number;
 }
 
@@ -19,8 +19,11 @@ type Settings = {
   slidesToScroll: number;
 };
 
-export function Beach({ width }: Width) {
-  const travelRef = useRef<HTMLDivElement>(null);
+export function Beach({ width }: BeachProps) {
+  const [selectedDesti, setSelectedDesti] = useState<DestinationInfo | null>(
+    null
+  );
+  const [showInformation, setShowInformation] = useToggle(false);
   const [showBooking, setShowBooking] = useToggle(false);
   const [settings, setSettings] = useState<Settings>();
 
@@ -43,110 +46,80 @@ export function Beach({ width }: Width) {
         slidesToScroll: 1,
       });
     }
-  }, [width]);
+  }, []);
 
   //Close travel info box.
+  function moreInformation(image: DestinationInfo) {
+    setShowInformation();
+    setSelectedDesti(image);
+  }
   function closeInfo() {
-    const current = travelRef.current;
-    if (current) {
-      current.style.display = "none";
-    }
+    setShowInformation();
   }
-
-  function displayInfoBody(image: {
-    destination: string;
-    days: number;
-    price: number;
-    description: string;
-  }) {
-    const current = travelRef.current;
-    if (current) {
-      current.style.display = "block";
-      const destination = current.querySelector(
-        "td.destination"
-      ) as HTMLTableCellElement;
-      const days = current.querySelector(
-        "td.days-length"
-      ) as HTMLTableCellElement;
-      const price = current.querySelector("td.price") as HTMLTableCellElement;
-      const description = current.querySelector(
-        "p.description"
-      ) as HTMLParagraphElement;
-
-      if (destination) {
-        destination.innerText = image.destination;
-      }
-      if (days) {
-        days.innerText = image.days.toString();
-      }
-      if (price) {
-        price.innerText = "$" + image.price.toString();
-      }
-
-      if (description) {
-        description.innerText = image.description;
-      }
-    }
+  function bookButton() {
+    setShowBooking();
   }
-
-  // useEffect(() => {
-  //   console.log("Change detected");
-  // }, []);
 
   return (
     <>
-      <MaskVideo />
       <div className="beach-container">
+        <MaskVideo />
         <div className="mask-container__beach">
           <div className="beach-background" />
         </div>
         <>
           <div className="beach-carusal-container">
             <Slider {...settings}>
-              {images.map((image) => {
-                {
-                  console.log(image.src);
-                }
+              {infoBeach.map((image) => {
                 return (
                   <div key={image.id}>
                     <img
                       className="slides"
                       src={image.src}
-                      onClick={() => displayInfoBody(image)}
+                      onClick={() => moreInformation(image)}
                     ></img>
                     <div className="beach-text-container">
-                      {image.destination}
+                      <table>
+                        <tbody>
+                          <tr>
+                            <th>Destination:</th>
+                            <td>{image.destination}</td>
+                          </tr>
+                          <tr>
+                            <th>Price:</th>
+                            <td>${image.price}</td>
+                          </tr>
+                          <tr>
+                            <th>Info:</th>
+                            <td className="travel-info-ellipsis">
+                              {image.description}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <button
+                        className="button-show-information"
+                        onClick={() => moreInformation(image)}
+                      >
+                        More Information
+                      </button>
+                      {}
                     </div>
                   </div>
                 );
               })}
             </Slider>
           </div>
-          <div className="travel-information" ref={travelRef}>
-            <button className="close-button" onClick={closeInfo}>
-              Close
-            </button>
-            <table>
-              <tbody>
-                <tr>
-                  <th>Destination:</th>
-                  <td className="destination"></td>
-                </tr>
-                <tr>
-                  <th>Days:</th>
-                  <td className="days-length"></td>
-                </tr>
-                <tr>
-                  <th>Price:</th>
-                  <td className="price">$</td>
-                </tr>
-              </tbody>
-            </table>
-            <p className="description"></p>
-            <button className="book-trip-button" onClick={setShowBooking}>
-              Book Trip
-            </button>
-          </div>
+
+          {showInformation ? (
+            <MoreInformation
+              selectedDesti={selectedDesti}
+              bookButton={bookButton}
+              closeInfo={closeInfo}
+            />
+          ) : (
+            ""
+          )}
           {showBooking ? <DatePicker setShowBooking={setShowBooking} /> : ""}
         </>
       </div>

@@ -1,17 +1,22 @@
-export interface SwipeElements {
+export interface CloseDatePicker {
+  setShowBooking: () => void;
+}
+
+export interface DestinationInfo {
   id: string;
+  destination: string;
   src: string;
   alt: string;
-  destination: string;
-  days: number;
   price: number;
   description: string;
 }
 
-export interface ImagesArray {
-  images: SwipeElements[];
+export interface InfoArray {
+  info: DestinationInfo[];
 }
 
-export interface CloseDatePicker {
-  setShowBooking: () => void;
+export interface MoreInformationProps {
+  selectedDesti: DestinationInfo | null;
+  bookButton: () => void;
+  closeInfo: () => void;
 }

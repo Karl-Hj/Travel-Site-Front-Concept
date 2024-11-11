@@ -1,11 +1,11 @@
-import TravelVideo from "../videos/beach-medium.mp4";
 import "./css/maskVideo.css";
+import travelVideo from "../videos/beach-medium.mp4";
 
 export function MaskVideo() {
   return (
     <div className="mask-video__container">
-      <video className="test" autoPlay muted loop>
-        <source src={TravelVideo} type="video/mp4"></source>
+      <video autoPlay muted loop>
+        <source src={travelVideo} type="video/mp4"></source>
       </video>
       <svg className="svg-travel">
         <defs>

@@ -2,9 +2,11 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Beach } from "../assets/components/Beach/Beach";
 import "../assets/components/css/beach.css";
+import "../assets/components/css/explore.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./home.css";
+import { Explore } from "../assets/components/Explore/Explore";
 
 export function Home() {
   const widthRef = useRef<HTMLDivElement>(null);
@@ -25,6 +27,7 @@ export function Home() {
   return (
     <div className="home-container" ref={widthRef}>
       <Beach width={width} />
+      <Explore />
       <Outlet />
     </div>
   );
