@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import "./css/datePicker.css";
+import "../../css/datePicker.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { useToggle } from "./costumHooks/useToggle";
-import { CloseDatePicker } from "./interfaces/interface";
+import { CloseDatePicker } from "../../interfaces/interface";
 
 export function DatePicker({ setShowBooking }: CloseDatePicker) {
   const INITALMONTH = new Date().getMonth();
@@ -116,7 +116,6 @@ export function DatePicker({ setShowBooking }: CloseDatePicker) {
   useEffect(() => {
     if (travelReturnDate && travelStartDate) {
       validation();
-      console.log("test");
     }
   }, [travelReturnDate, travelStartDate]);
 
@@ -151,17 +150,15 @@ export function DatePicker({ setShowBooking }: CloseDatePicker) {
       <button className="close-date-picker" onClick={setShowBooking}>
         Close
       </button>
-      <div className="date-picker-container">
-        <div className="date-picker-instruction">
-          Select A Date For Depature
+      <div className="date-picker-instruction">Select A Date For Depature</div>
+      {showError !== true ? (
+        ""
+      ) : (
+        <div className="date-picker-error">
+          Return Date Can Not Be Before Start Date!
         </div>
-        {showError !== true ? (
-          ""
-        ) : (
-          <div className="date-picker-error">
-            Return Date can not be before start Date!
-          </div>
-        )}
+      )}
+      <div className="date-picker-container">
         <div className="date-container-info">
           <i className="fas fa-arrow-left" onClick={decrementMonth} />
           <span className="current-month">{currentMonthDisplay}</span>

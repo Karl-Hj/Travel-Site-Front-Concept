@@ -1,12 +1,11 @@
-import { MoreInformationProps } from "./interfaces/interface";
-import "./css/moreInformation.css";
+import { MoreInformationProps } from "../../interfaces/interface";
+import "../../css/moreInformation.css";
 // Shows more information about the selected trip
 export function MoreInformation({
   selectedDesti,
   bookButton,
   closeInfo,
 }: MoreInformationProps) {
-  console.log(selectedDesti);
   return (
     <div className="more-information-container">
       <button className="close-info-button" onClick={closeInfo}>
