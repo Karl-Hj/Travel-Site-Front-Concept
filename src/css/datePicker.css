@@ -270,13 +270,19 @@
   .date-pick-booking-container {
     position: absolute;
     height: 100%;
-    top: 54%;
+    top: 50%;
     transform: translateY(-50%);
     width: 100%;
   }
   .date-picker-container {
     height: 60vh;
+    max-height: 550px;
     width: 20vw;
-    top: 5%;
+    max-width: 300px;
+    top: 20%;
+    transform: translateY(-20%);
+  }
+  .close-date-picker {
+    top: 3%;
   }
 }

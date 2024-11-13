@@ -4,7 +4,7 @@ import { DestinationInfo } from "../../interfaces/interface";
 import { useState } from "react";
 import { DatePicker } from "../../assets/components/Datepicker";
 import { MoreInformation } from "../../assets/components/MoreInformation";
-import video from "../../assets/videos/explore-1.mp4";
+import video from "../../assets/videos/explore3.mp4";
 import { MaskVideo } from "../../assets/components/MaskVideo";
 import { Display } from "../../assets/components/Display";
 import "../../css/explore.css";
